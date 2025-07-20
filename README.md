@@ -1,6 +1,17 @@
 # 🚀 NXT Hire – AI-Powered Career Coach & Job Portal
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Available-brightgreen?style=for-the-badge)](https://hirewith-nxthire.netlify.app/)
+[![Netlify Status](https://img.shields.io/badge/Netlify-Deployed-00C7B7?style=for-the-badge&logo=netlify)](https://hirewith-nxthire.netlify.app/)
+[![Next.js](https://img.shields.io/badge/Next.js-15.1.4-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+
 An advanced full-stack AI-powered job portal that analyzes resumes, provides smart job suggestions, and connects candidates with curated tech opportunities.
+
+## 🌐 Live Demo
+
+**🔗 [Experience NXT Hire Live](https://hirewith-nxthire.netlify.app/)**
+
+Try the complete AI-powered career platform with all features available for testing!
 
 ## 📸 Demo Screenshots
 
@@ -271,6 +282,26 @@ If you have any questions or need help, please:
 - 🤖 AI Career Chatbot Assistant
 - 🧮 Job Match Scoring System
 - 🔗 LinkedIn Profile Optimizer
+
+## 🚀 Deployment
+
+The application is live and accessible at: **[https://hirewith-nxthire.netlify.app/](https://hirewith-nxthire.netlify.app/)**
+
+### Deployment Features:
+- **Platform**: Netlify with continuous deployment
+- **Performance**: Optimized for fast loading and smooth user experience
+- **Security**: HTTPS encryption and secure authentication
+- **Accessibility**: Available 24/7 with 99.9% uptime
+- **Global**: Fast delivery via Netlify's global CDN network
+
+### What You Can Test:
+- ✅ **AI Resume Builder** - Create professional resumes
+- ✅ **Resume Analysis** - Get AI-powered optimization suggestions  
+- ✅ **Job Portal** - Browse and filter job opportunities
+- ✅ **Cover Letter Generator** - Generate personalized cover letters
+- ✅ **Interview Prep** - Practice with mock interview questions
+- ✅ **Application Tracker** - Manage your job applications
+- ✅ **User Authentication** - Secure sign-up and login
 
 # 🙌 Contributing
 
