@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
 import Link from "next/link";
 
 const HeroSection = () => {
@@ -46,9 +47,10 @@ const HeroSection = () => {
               Get Started
             </Button>
           </Link>
-          <Link href="https://www.youtube.com/roadsidecoder">
-            <Button size="lg" variant="outline" className="px-8">
-              Watch Demo
+          <Link href="https://github.com/jagarapuRadhaKrishna/AI-Career-Coach" target="_blank" rel="noopener noreferrer">
+            <Button size="lg" className="px-8 flex items-center gap-2">
+              <Github className="h-5 w-5 text-red-500" />
+              GitHub
             </Button>
           </Link>
         </div>

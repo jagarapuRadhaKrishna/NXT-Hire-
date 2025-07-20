@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -23,9 +23,8 @@ import useFetch from "@/hooks/use-fetch";
 import { useUser } from "@clerk/nextjs";
 import { entriesToMarkdown } from "@/app/lib/helper";
 import { resumeSchema } from "@/app/lib/schema";
-import html2pdf from "html2pdf.js/dist/html2pdf.min.js";
 
-export default function ResumeBuilder({ initialContent }) {
+const ResumeBuilder = memo(({ initialContent }) => {
   const [activeTab, setActiveTab] = useState("edit");
   const [previewContent, setPreviewContent] = useState(initialContent);
   const { user } = useUser();
@@ -115,6 +114,9 @@ export default function ResumeBuilder({ initialContent }) {
   const generatePDF = async () => {
     setIsGenerating(true);
     try {
+      // Dynamic import for client-side only
+      const html2pdf = (await import("html2pdf.js/dist/html2pdf.min.js")).default;
+      
       const element = document.getElementById("resume-pdf");
       const opt = {
         margin: [15, 15],
@@ -127,6 +129,7 @@ export default function ResumeBuilder({ initialContent }) {
       await html2pdf().set(opt).from(element).save();
     } catch (error) {
       console.error("PDF generation error:", error);
+      toast.error("Failed to generate PDF");
     } finally {
       setIsGenerating(false);
     }
@@ -149,9 +152,6 @@ export default function ResumeBuilder({ initialContent }) {
   return (
     <div data-color-mode="light" className="space-y-4">
       <div className="flex flex-col md:flex-row justify-between items-center gap-2">
-        <h1 className="font-bold gradient-title text-5xl md:text-6xl">
-          Resume Builder
-        </h1>
         <div className="space-x-2">
           <Button
             variant="destructive"
@@ -416,4 +416,8 @@ export default function ResumeBuilder({ initialContent }) {
       </Tabs>
     </div>
   );
-}
+});
+
+ResumeBuilder.displayName = 'ResumeBuilder';
+
+export default ResumeBuilder;

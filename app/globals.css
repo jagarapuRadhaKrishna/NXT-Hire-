@@ -80,6 +80,49 @@ body {
   }
 }
 
+/* Job Portal Animations */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.pause-animation:hover .animate-scroll {
+  animation-play-state: paused;
+}
+
+/* Additional utility classes for job portal */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Enhanced card hover effects */
+.job-card {
+  transition: all 0.3s ease;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
 .hero-image-wrapper {
   perspective: 1000px;
 }
@@ -120,4 +163,36 @@ body {
   width: 100%;
   height: 100%;
   background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.9));
+}
+
+/* Scrollbar hide utilities */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
+
+/* Auto-scroll animation - continuous scrolling */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 60s linear infinite;
+}
+
+.animate-scroll-fast {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover,
+.animate-scroll-fast:hover {
+  animation-play-state: paused;
 }

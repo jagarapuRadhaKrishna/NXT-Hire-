@@ -27,6 +27,8 @@ model User {
   assessments   Assessment[]
   resume        Resume?
   coverLetter   CoverLetter[]
+  dsaProgress   DSAProgress?
+  linkedinData  LinkedInData?
 }
 
 model Assessment {
@@ -96,4 +98,127 @@ model IndustryInsight {
   nextUpdate    DateTime  // Scheduled update time
 
   @@index([industry])
+}
+
+// DSA Progress Tracking
+model DSAProgress {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  
+  // Overall statistics
+  totalSolved     Int       @default(0)
+  easyCompleted   Int       @default(0)
+  mediumCompleted Int       @default(0)
+  hardCompleted   Int       @default(0)
+  currentStreak   Int       @default(0)
+  maxStreak       Int       @default(0)
+  acceptanceRate  Float     @default(0)
+  
+  // Performance metrics
+  averageTime     Float?    // Average time per problem in minutes
+  totalTimeSpent  Float     @default(0) // Total time in hours
+  
+  // Relations
+  solvedProblems  SolvedProblem[]
+  topicProgress   TopicProgress[]
+  submissions     Submission[]
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+// Individual solved problems
+model SolvedProblem {
+  id              String    @id @default(cuid())
+  dsaProgressId   String
+  dsaProgress     DSAProgress @relation(fields: [dsaProgressId], references: [id])
+  
+  problemId       String    // External problem ID (e.g., LeetCode ID)
+  title           String
+  difficulty      String    // Easy, Medium, Hard
+  category        String    // arrays, trees, dp, etc.
+  timeToSolve     Float?    // Time taken in minutes
+  attempts        Int       @default(1)
+  
+  solvedAt        DateTime  @default(now())
+
+  @@unique([dsaProgressId, problemId])
+  @@index([dsaProgressId])
+}
+
+// Topic-wise progress
+model TopicProgress {
+  id              String    @id @default(cuid())
+  dsaProgressId   String
+  dsaProgress     DSAProgress @relation(fields: [dsaProgressId], references: [id])
+  
+  topicId         String    // arrays, linkedlist, trees, dp, etc.
+  topicName       String
+  solved          Int       @default(0)
+  totalProblems   Int
+  accuracy        Float     @default(0)
+  averageTime     Float?    // Average time for this topic
+  
+  lastSolved      DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@unique([dsaProgressId, topicId])
+  @@index([dsaProgressId])
+}
+
+// Code submissions tracking
+model Submission {
+  id              String    @id @default(cuid())
+  dsaProgressId   String
+  dsaProgress     DSAProgress @relation(fields: [dsaProgressId], references: [id])
+  
+  problemId       String
+  problemTitle    String
+  difficulty      String
+  status          String    // Accepted, Wrong Answer, Time Limit Exceeded, etc.
+  language        String    // JavaScript, Python, Java, etc.
+  code            String    @db.Text
+  runtime         String?   // e.g., "68ms"
+  memory          String?   // e.g., "44.2MB"
+  
+  submittedAt     DateTime  @default(now())
+
+  @@index([dsaProgressId])
+  @@index([submittedAt])
+}
+
+// LinkedIn Profile Data
+model LinkedInData {
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id])
+  
+  // Profile information
+  profileUrl      String?
+  headline        String?
+  summary         String?
+  location        String?
+  industry        String?
+  connectionsCount Int      @default(0)
+  
+  // Analytics data
+  profileViews    Json?     // Weekly and monthly views data
+  searchAppearances Json?   // Search ranking and keywords
+  postAnalytics   Json?     // Post engagement metrics
+  
+  // Optimization scores
+  profileCompleteness Int   @default(0)
+  optimizationScore   Int   @default(0)
+  seoScore           Int   @default(0)
+  
+  // Tracking
+  lastSynced      DateTime  @default(now())
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([userId])
 }

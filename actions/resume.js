@@ -3,7 +3,8 @@
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { unstable_cache } from "next/cache";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -33,6 +34,7 @@ export async function saveResume(content) {
     });
 
     revalidatePath("/resume");
+    revalidateTag(`resume-${user.id}`); // Invalidate the cache
     return resume;
   } catch (error) {
     console.error("Error saving resume:", error);
@@ -50,11 +52,23 @@ export async function getResume() {
 
   if (!user) throw new Error("User not found");
 
-  return await db.resume.findUnique({
-    where: {
-      userId: user.id,
+  // Cache the resume data for faster loading
+  const getCachedResume = unstable_cache(
+    async (userId) => {
+      return await db.resume.findUnique({
+        where: {
+          userId: userId,
+        },
+      });
     },
-  });
+    [`resume-${user.id}`],
+    {
+      tags: [`resume-${user.id}`],
+      revalidate: 300, // Cache for 5 minutes
+    }
+  );
+
+  return await getCachedResume(user.id);
 }
 
 export async function improveWithAI({ current, type }) {

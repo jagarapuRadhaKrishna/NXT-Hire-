@@ -28,7 +28,37 @@ export async function updateUser(data) {
 
         // If industry doesn't exist, create it with default values
         if (!industryInsight) {
-          const insights = await generateAIInsights(data.industry);
+          let insights;
+          
+          // Only generate AI insights if API key is available
+          if (process.env.GEMINI_API_KEY) {
+            try {
+              insights = await generateAIInsights(data.industry);
+            } catch (insightError) {
+              console.error("Error generating AI insights:", insightError.message);
+              // Use default insights if AI generation fails
+              insights = {
+                salaryRanges: [],
+                growthRate: 0,
+                demandLevel: "Medium",
+                topSkills: [],
+                marketOutlook: "Neutral",
+                keyTrends: [],
+                recommendedSkills: []
+              };
+            }
+          } else {
+            // Use default insights when API key is not available
+            insights = {
+              salaryRanges: [],
+              growthRate: 0,
+              demandLevel: "Medium",
+              topSkills: [],
+              marketOutlook: "Neutral",
+              keyTrends: [],
+              recommendedSkills: []
+            };
+          }
 
           industryInsight = await db.industryInsight.create({
             data: {

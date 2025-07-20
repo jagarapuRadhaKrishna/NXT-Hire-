@@ -4,6 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import ServiceWorkerRegister from "@/components/service-worker-register";
 import { dark } from "@clerk/themes";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,10 +23,16 @@ export default function RootLayout({ children }) {
     >
       <html lang="en" suppressHydrationWarning>
         <head>
+          {/* Performance optimizations */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link rel="dns-prefetch" href="https://api.clerk.dev" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           {/* Favicon - can be kept or changed as needed */}
           <link rel="icon" href="/career_14646654.png" sizes="any" />
         </head>
         <body className={inter.className}>
+          <ServiceWorkerRegister />
           <ThemeProvider
             attribute="class"
             defaultTheme="dark"
