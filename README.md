@@ -7,32 +7,8 @@ An advanced full-stack AI-powered job portal that analyzes resumes, provides sma
 ### Homepage
 ![Homepage](./public/demo/homepage.png)
 
-### Dashboard
-![Dashboard](./public/demo/dashboard.png)
-
-### Application Tracker
-![Application Tracker](./public/demo/application-tracker.png)
-
-### Resume Builder
-![Resume Builder](./public/demo/resume-builder.png)
-
-### Resume Analyzer
-![Resume Analyzer](./public/demo/resume-analyzer.png)
-
-### Cover Letter Generator
-![Cover Letter Generator](./public/demo/cover-letter-generator.png)
-
-### Interview Preparation
-![Interview Preparation](./public/demo/interview-preparation.png)
-
 ### Job Portal
 ![Job Portal](./public/demo/job-portal.png)
-
-### LinkedIn Optimizer
-![LinkedIn Optimizer](./public/demo/linkedin-optimizer.png)
-
-### Company Explorer
-![Company Site](./public/demo/company-site.png)
 
 ## 🌟 Features
 
