@@ -42,7 +42,7 @@ Try the complete AI-powered career platform with all features available for test
 - **Authentication**: Clerk.dev
 - **AI/ML**: OpenAI GPT-4, Google Gemini APIs
 - **File Processing**: html2pdf.js, react-hook-form
-- **Deployment**: Vercel
+- **Deployment**: Netlify
 - **Development**: ESLint, Prettier, Turbopack
 
 ## � Project Structure
@@ -166,15 +166,15 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 
 ## 🚀 Deployment
 
-The application is deployed on Vercel. To deploy your own instance:
+The application is deployed on Netlify. To deploy your own instance:
 
 1. Fork this repository
-2. Connect your Vercel account to GitHub
-3. Import the project to Vercel
-4. Add environment variables in Vercel dashboard
+2. Connect your Netlify account to GitHub
+3. Import the project to Netlify
+4. Add environment variables in Netlify dashboard
 5. Deploy
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/jagarapuRadhaKrishna/AI-Career-Coach)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/jagarapuRadhaKrishna/NXT-Hire-)
 
 ## 🧠 AI Features
 
@@ -247,7 +247,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Clerk](https://clerk.dev) for authentication
 - [Neon](https://neon.tech) for PostgreSQL hosting
 - [OpenAI](https://openai.com) for AI capabilities
-- [Vercel](https://vercel.com) for deployment
+- [Netlify](https://netlify.com) for deployment
 - [shadcn/ui](https://ui.shadcn.com) for UI components
 
 ## � Support
